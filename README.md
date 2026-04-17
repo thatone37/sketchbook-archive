@@ -7,7 +7,7 @@ the sketchbook archive is a collection of sketchbooks, artwork, and doodles comp
 
  [submit your own](https://docs.google.com/document/d/1COuIGUMNujyWF17uJ3ZVAYwHHUmdckeI42_x2-iCUxI/edit?usp=sharing)
 
- [view our library](path/to/sketchbook-archive/README.md)
+ [view our library](https://github.com/thatone37/sketchbook-archive/blob/12ff889fd13f03f16bf334a0cc861415cbf84596/README.md)
 
  [suggestion box](https://docs.google.com/document/d/1g74XDE6YZr-kgQonRcWPtt-8vymmP_F0UF5LPY46ZB0/edit?usp=sharing )
 
