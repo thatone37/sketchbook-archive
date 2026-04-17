@@ -12,5 +12,3 @@ the sketchbook archive is a collection of sketchbooks, artwork, and doodles comp
  [suggestion box](https://docs.google.com/document/d/1g74XDE6YZr-kgQonRcWPtt-8vymmP_F0UF5LPY46ZB0/edit?usp=sharing )
 
 [more](https://docs.google.com/document/d/1n-Xp1rBmxK1WOukv6a0ApYL6t9KaILWCtLJpcdoBCa0/edit?usp=sharing)
-
-[sketchbook-archive](https://github.com)
