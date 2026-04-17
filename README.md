@@ -5,9 +5,9 @@ the sketchbook archive is a collection of sketchbooks, artwork, and doodles comp
 (hopefully soon also a collection of journals and poetry!!)
 ### where to?
 
- [submit your own]( )
+ [submit your own](https://docs.google.com/document/d/1COuIGUMNujyWF17uJ3ZVAYwHHUmdckeI42_x2-iCUxI/edit?usp=sharing)
 
- [view our library]( )
+ [view our library](sketchbook-library)
 
  [suggestion box](https://docs.google.com/document/d/1g74XDE6YZr-kgQonRcWPtt-8vymmP_F0UF5LPY46ZB0/edit?usp=sharing )
 
