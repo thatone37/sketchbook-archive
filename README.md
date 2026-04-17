@@ -1,2 +1,10 @@
 # sketchbook-archive
-a digital sketchbook archive!!
+where our library books are kept!
+## WHEN YOU PICK ONE OUT!! PLEASE REMEMBER!!
+1) be kind!! some things arent going to be to your taste! thats okay! move on!
+2) check the trigger warnings. Please be careful
+3) the artist's socials will be linked!! Please support them and check them out!!!
+
+### the archive!!
+
+..there's nothing here yet! Please be patient!! this is a work in progress<33
