@@ -5,11 +5,12 @@ the sketchbook archive is a collection of sketchbooks, artwork, and doodles comp
 (hopefully soon also a collection of journals and poetry!!)
 ### where to?
 
- [submit your own](https://docs.google.com/document/d/1COuIGUMNujyWF17uJ3ZVAYwHHUmdckeI42_x2-iCUxI/edit?usp=sharing)
+[submit your own](https://docs.google.com/document/d/1COuIGUMNujyWF17uJ3ZVAYwHHUmdckeI42_x2-iCUxI/edit?usp=sharing)
 
- [view our library](the-archive)
+[view our library](the-archive)
 
- [suggestion box](https://docs.google.com/document/d/1g74XDE6YZr-kgQonRcWPtt-8vymmP_F0UF5LPY46ZB0/edit?usp=sharing )
+[suggestion box](https://docs.google.com/document/d/1g74XDE6YZr-kgQonRcWPtt-8vymmP_F0UF5LPY46ZB0/edit?usp=sharing )
 
 [more](https://docs.google.com/document/d/1n-Xp1rBmxK1WOukv6a0ApYL6t9KaILWCtLJpcdoBCa0/edit?usp=sharing)
+
 muehehehe
