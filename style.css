@@ -1,19 +1,22 @@
 h1 {
   color: #3F5CA2;
   font-size: 40px;
-  font-family: verdana, sans-serif;
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
 }
 
 h2 {
   color: #F58529;
   font-size: 30px;
-  font-family: verdana, sans-serif;
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
 }
 
 h3 {
   color: #F58529;
   font-size: 25px;
-  font-family: verdana, sans-serif;
+ font-family: "Indie Flower", cursive;
+  font-weight: 400;
 }
 
 body {
@@ -57,9 +60,10 @@ header {
   color: white;
 }
 
-body {
+
+body, p, a {
+  font-family: Verdana, sans-serif;
   color: #203A69;
-  background-color: #A1CDF4;
 }
 
 body {
@@ -70,6 +74,13 @@ body {
 }
 
 muehehe
+
+body {
+  background-color: #A1CDF4;
+  background-image: url('');
+  background-repeat: repeat;
+  background-blend-mode: lighten;
+}
 
 
 
