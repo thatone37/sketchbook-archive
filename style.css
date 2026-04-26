@@ -16,9 +16,9 @@ h3 {
   font-family: verdana, sans-serif;
 }
 
-
-
-<body style="background-color:#A1CDF4;">
+body {
+  background-color: #A1CDF4;
+}
 
 .gallery {
   column-count: 3;
@@ -40,3 +40,4 @@ h3 {
   margin: 5px 0 0;
   font-size: 14px;
 }
+
