@@ -79,7 +79,7 @@ body {
   background-color: #A1CDF4;
   background-image: url('pngtree-lined-paper-texture-on-a-notebook-page-perfect-for-background-design-picture-image_13425380.jpg.png');
   background-repeat: repeat;
-  background-blend-mode: lighten;
+  background-blend-mode: overlay;
 }
 
 
