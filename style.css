@@ -24,19 +24,16 @@ body {
 }
 
 .gallery {
-  column-count: 3;
-  column-gap: 15px;
-}
-
-.item {
-  break-inside: avoid;  
-  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
 }
 
 .item img {
   width: 100%;
-  display: block;
+  height: auto;
   border-radius: 10px;
+  display: block;
 }
 
 .item p {
