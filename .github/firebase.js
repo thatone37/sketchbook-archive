@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Like button
   document.getElementById("like-btn").addEventListener("click", () => {
 
+    console.log("clicked!");
+
     runTransaction(likesRef, (currentLikes) => {
       return (currentLikes || 0) + 1;
     });
