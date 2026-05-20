@@ -77,3 +77,18 @@ body {
 um guys??? hello????
 
 
+#like-btn {
+  background: #F58529;
+  border: 2px #3F5CA2;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#like-btn:hover {
+  transform: scale(1.05);
+}
+
+#like-count {
+  font-family: Verdana, sans-serif;
+}
