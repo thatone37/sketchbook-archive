@@ -33,7 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Like button
-  document.getElementById("like-btn").addEventListener("click", () => {
+  document.getElementById("like-btn-cat").addEventListener("click", () => {
+
+    console.log("clicked!");
+
+    runTransaction(likesRef, (currentLikes) => {
+      return (currentLikes || 0) + 1;
+
+        document.getElementById("like-btn-maka").addEventListener("click", () => {
+
+    console.log("clicked!");
+
+    runTransaction(likesRef, (currentLikes) => {
+      return (currentLikes || 0) + 1;
+
+        document.getElementById("like-btn-lynx").addEventListener("click", () => {
 
     console.log("clicked!");
 
