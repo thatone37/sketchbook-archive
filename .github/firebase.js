@@ -20,30 +20,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // Setup each sketchbook's likes
-  const sketchbooks = [
-    { id: "cat", name: "cat-sketches" },
-    { id: "maka", name: "maka-sketch" },
-    { id: "lynx", name: "lynxagon7" }
-  ];
+// Setup each sketchbook's likes
+const sketchbooks = [
+  { id: "cat", name: "cat-sketches" },
+  { id: "maka", name: "maka-sketch" },
+  { id: "lynx", name: "lynxagon7" }
+];
 
-  sketchbooks.forEach(({ id, name }) => {
-    const likesRef = ref(db, `likes/${name}`);
+sketchbooks.forEach(({ id, name }) => {
+  const likesRef = ref(db, `likes/${name}`);
 
-    // Display likes
-    onValue(likesRef, (snapshot) => {
-      const count = snapshot.val() || 0;
-      document.getElementById(`like-count-${id}`).textContent = `${count} likes`;
-    });
+  // Display likes
+  onValue(likesRef, (snapshot) => {
+    const count = snapshot.val() || 0;
+    document.getElementById(`like-count-${id}`).textContent = `${count} likes`;
+  });
 
-    // Like button
-    document.getElementById(`like-btn-${id}`).addEventListener("click", () => {
-      console.log(`Clicked ${name}!`);
-      runTransaction(likesRef, (currentLikes) => {
-        return (currentLikes || 0) + 1;
-      });
+  // Like button
+  document.getElementById(`like-btn-${id}`).addEventListener("click", () => {
+    console.log(`Clicked ${name}!`);
+    runTransaction(likesRef, (currentLikes) => {
+      return (currentLikes || 0) + 1;
     });
   });
 });
