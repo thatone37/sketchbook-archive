@@ -29,18 +29,40 @@ const sketchbooks = [
 
 sketchbooks.forEach(({ id, name }) => {
   const likesRef = ref(db, `likes/${name}`);
+  const likedKey = `liked_${name}`; //important or something, idk
 
-  // Display likes
+  // how the button lookss/ display
   onValue(likesRef, (snapshot) => {
     const count = snapshot.val() || 0;
     document.getElementById(`like-count-${id}`).textContent = `${count} likes`;
   });
 
-  // Like button
-  document.getElementById(`like-btn-${id}`).addEventListener("click", () => {
+  // like button!!!
+  const likeBtn = document.getElementById(`like-btn-${id}`);
+  
+  // checks if they already liked it!!
+  if (localStorage.getItem(likedKey)) {
+    likeBtn.disabled = true;
+    likeBtn.style.opacity = "0.5";
+    likeBtn.style.cursor = "not-allowed";
+  }
+
+  likeBtn.addEventListener("click", () => {
+    // ^^ same as previous note
+    if (localStorage.getItem(likedKey)) {
+      console.log(`Already liked ${name}!`);
+      return;
+    }
+
     console.log(`Clicked ${name}!`);
     runTransaction(likesRef, (currentLikes) => {
       return (currentLikes || 0) + 1;
     });
+
+    // mark as likedd
+    localStorage.setItem(likedKey, "true");
+    likeBtn.disabled = true;
+    likeBtn.style.opacity = "0.5";
+    likeBtn.style.cursor = "not-allowed";
   });
 });
