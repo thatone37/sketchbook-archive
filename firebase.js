@@ -24,7 +24,7 @@ const db = getDatabase(app);
 const sketchbooks = [
   { id: "cat", name: "cat-sketches" },
   { id: "maka", name: "maka-sketch" },
-  { id: "lynx", name: "lynxagon7" }
+  { id: "lynx", name: "lynxagon7" },
     { id: "rae", name: "rae-sketches" }
 ];
 
