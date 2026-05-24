@@ -25,6 +25,7 @@ const sketchbooks = [
   { id: "cat", name: "cat-sketches" },
   { id: "maka", name: "maka-sketch" },
   { id: "lynx", name: "lynxagon7" }
+    { id: "rae", name: "rae-sketches" }
 ];
 
 sketchbooks.forEach(({ id, name }) => {
