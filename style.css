@@ -92,3 +92,12 @@ um guys??? hello????
 #like-count {
   font-family: Verdana, sans-serif;
 }
+
+
+body {
+    font-family: "Indie Flower", cursive;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
