@@ -15,7 +15,7 @@ h2 {
 h3 {
   color: #F58529;
   font-size: 25px;
- font-family: "Indie Flower", cursive;
+  font-family: "Indie Flower", cursive;
   font-weight: 400;
 }
 
@@ -72,10 +72,17 @@ body {
   background-image: url('background.png');
   background-repeat: repeat;
   background-size: auto;
+  font-family: "Indie Flower", cursive;
+  margin: 0;
+  padding: 0;
 }
 
-um guys??? hello????
-
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
 
 #like-btn {
   background: #F58529;
@@ -93,31 +100,16 @@ um guys??? hello????
   font-family: Verdana, sans-serif;
 }
 
-
-body {
-    font-family: "Indie Flower", cursive;
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-}
-
-
-
-
-
-
-
-
-  margin: 0;
-}
-
-
-
+/* Ticker styles */
 .ticker {
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   overflow: hidden;
   white-space: nowrap;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  background: rgba(255,255,255,0.1);
 }
 
 .ticker span {
@@ -134,26 +126,4 @@ body {
   to {
     transform: translateX(-100%);
   }
-}
-
-
-.ticker {
-  width: 100%;
-
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-
-  
-  overflow: hidden;
-  white-space: nowrap;
-
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-
-  padding: 8px 0;
-  background: rgba(255,255,255,0.1);
-  margin: 0;
 }
