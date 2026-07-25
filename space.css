@@ -1,8 +1,10 @@
 h1 {
-  color: #3F5CA2;
+  color: #E1DD8F;
   font-size: 40px;
-  font-family: "Indie Flower", cursive;
-  font-weight: 400;
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 
 h2 {
