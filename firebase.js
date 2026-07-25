@@ -27,9 +27,9 @@ const sketchbooks = [
   { id: "lynx", name: "lynxagon7" },
     { id: "rae", name: "rae-sketches" },
   {id: "mario", name: "mario-sketches"},
-   {id: "insect", name: "insect-sketches"},
-  {id: "like-btn-yes", name: "wow great idea maka you should do that i would join"},
-  {id: "like-btn-no", name: "TERRIBLE IDEA DIE IN A FIRE"}
+    {id: "insect", name: "insect-sketches"},
+  {id: "yes", name: "interest-check-yes"},
+  {id: "no", name: "interest-check-no"}
 ];
 
 sketchbooks.forEach(({ id, name }) => {
