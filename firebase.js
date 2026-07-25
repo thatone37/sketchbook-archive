@@ -20,7 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-//ADD YOUR SKETCHBOOKS HERE!!! FUTURE MAKA ITS RIGHT HERE PLEASEE and dont forget the comma!! thats important as well!!!
+//ADD YOUR SKETCHBOOKS HERE!!! FUTURE MAKA ITS RIGHT HERE PLEASEE and dont forget the comma!! thats important as well!!! lala
 const sketchbooks = [
   { id: "cat", name: "cat-sketches" },
   { id: "maka", name: "maka-sketch" },
