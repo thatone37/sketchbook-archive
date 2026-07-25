@@ -20,13 +20,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-//ADD YOUR SKETCHBOOKS HERE!!!
+//ADD YOUR SKETCHBOOKS HERE!!! FUTURE MAKA ITS RIGHT HERE PLEASEE
 const sketchbooks = [
   { id: "cat", name: "cat-sketches" },
   { id: "maka", name: "maka-sketch" },
   { id: "lynx", name: "lynxagon7" },
     { id: "rae", name: "rae-sketches" },
   {id: "mario", name: "mario-sketches"}
+   {id: "insect", name: "insect-sketches"}
 ];
 
 sketchbooks.forEach(({ id, name }) => {
