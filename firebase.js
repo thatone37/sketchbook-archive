@@ -25,27 +25,35 @@ const sketchbooks = [
   { id: "cat", name: "cat-sketches" },
   { id: "maka", name: "maka-sketch" },
   { id: "lynx", name: "lynxagon7" },
-    { id: "rae", name: "rae-sketches" },
-  {id: "mario", name: "mario-sketches"},
-    {id: "insect", name: "insect-sketches"},
-  {id: "like-btn-yes", name: "like-btn-yes"},
-  {id: "like-btn-no", name: "like-btn-no"}
+  { id: "rae", name: "rae-sketches" },
+  { id: "mario", name: "mario-sketches" },
+  { id: "insect", name: "insect-sketches" },
+  // "yes" and "no" are the ids used in the root index.html buttons
+  { id: "yes", name: "like-btn-yes" },
+  { id: "no", name: "like-btn-no" }
 ];
 
 sketchbooks.forEach(({ id, name }) => {
   const likesRef = ref(db, `likes/${name}`);
   const likedKey = `liked_${name}`; //important or something, idk
 
-  // how the button lookss/ display
+  // find elements
+  const likeBtn = document.getElementById(`like-btn-${id}`);
+  const likeCountEl = document.getElementById(`like-count-${id}`);
+
+  // If the elements for this sketchbook aren't present on the page, skip it safely
+  if (!likeBtn || !likeCountEl) {
+    console.warn(`Skipping ${name}: missing elements (likeBtn=${!!likeBtn}, likeCount=${!!likeCountEl})`);
+    return;
+  }
+
+  // display likes
   onValue(likesRef, (snapshot) => {
     const count = snapshot.val() || 0;
-    document.getElementById(`like-count-${id}`).textContent = `${count} likes`;
+    likeCountEl.textContent = `${count} likes`;
   });
 
-  // like button!!!
-  const likeBtn = document.getElementById(`like-btn-${id}`);
-  
-  // checks if they already liked it!!
+  // checks if they already liked it
   if (localStorage.getItem(likedKey)) {
     likeBtn.disabled = true;
     likeBtn.style.opacity = "0.5";
@@ -53,7 +61,6 @@ sketchbooks.forEach(({ id, name }) => {
   }
 
   likeBtn.addEventListener("click", () => {
-    // ^^ same as previous note
     if (localStorage.getItem(likedKey)) {
       console.log(`Already liked ${name}!`);
       return;
@@ -64,7 +71,7 @@ sketchbooks.forEach(({ id, name }) => {
       return (currentLikes || 0) + 1;
     });
 
-    // mark as likedd
+    // mark as liked
     localStorage.setItem(likedKey, "true");
     likeBtn.disabled = true;
     likeBtn.style.opacity = "0.5";
