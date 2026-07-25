@@ -28,8 +28,8 @@ const sketchbooks = [
     { id: "rae", name: "rae-sketches" },
   {id: "mario", name: "mario-sketches"},
     {id: "insect", name: "insect-sketches"},
-  {id: "yes", name: "interest-check-yes"},
-  {id: "no", name: "interest-check-no"}
+  {id: "yes", name: "like-btn-yes"},
+  {id: "no", name: "like-btn-no"}
 ];
 
 sketchbooks.forEach(({ id, name }) => {
