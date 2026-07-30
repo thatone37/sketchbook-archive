@@ -179,6 +179,8 @@
 
     // Basic escaping to avoid injecting HTML
     function escapeHtml(s){ return String(s || '').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+  
+  expose for console debugging window._fb = { app, auth, db, collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp };
   </script>
 
   <link rel="stylesheet" href="style.css">
