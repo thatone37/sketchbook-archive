@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <title>Comments</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     body{font-family:system-ui,Arial;margin:18px}
     #comment-list{margin-top:1rem}
     .comment{border-bottom:1px solid #eee;padding:8px 0}
     .meta{color:#666;font-size:0.85rem}
+    input, textarea {font-family:inherit}
   </style>
 </head>
 <body>
-  <!-- Set data-post-id on a container or replace POST_ID below per page -->
-  <div id="comments" data-post-id="POST_ID">
+  <!-- Set data-post-id on this container (replace POST_ID per page) -->
+  <div id="comments" data-post-id="discussionsTRYTWO">
     <h3>Comments</h3>
 
     <div id="auth">
@@ -37,14 +39,18 @@
   </div>
 
   <script type="module">
-    // 1) Paste your firebaseConfig here (from Firebase Console)
+    // 1) Your Firebase config - KEEP this in client code (it's safe for public)
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      // ...other keys
+      apiKey: "AIzaSyDx9a-YIut8aM1AaoMPFD6NvMiBfP7QyNI",
+      authDomain: "sketchbook-archive-accounts.firebaseapp.com",
+      projectId: "sketchbook-archive-accounts",
+      storageBucket: "sketchbook-archive-accounts.firebasestorage.app",
+      messagingSenderId: "73621536424",
+      appId: "1:73621536424:web:a6d319510c81d1cda54c9d",
+      measurementId: "G-39QCNWCKPB"
     };
 
+    // 2) Imports (modular SDK v9.x)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import {
       getAuth,
@@ -64,6 +70,7 @@
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
+    // 3) Init Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
@@ -128,7 +135,6 @@
       if (!user) return alert('Sign in first');
       const content = contentInput.value.trim();
       if (!content) return;
-      // Simple content length guard
       if (content.length > 2000) return alert('Comment too long (2000 chars max)');
       try {
         await addDoc(collection(db, 'comments'), {
@@ -168,37 +174,5 @@
     // Basic escaping to avoid injecting HTML
     function escapeHtml(s){ return String(s || '').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
   </script>
-
-  // and then the scripttt!!
-
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDx9a-YIut8aM1AaoMPFD6NvMiBfP7QyNI",
-    authDomain: "sketchbook-archive-accounts.firebaseapp.com",
-    projectId: "sketchbook-archive-accounts",
-    storageBucket: "sketchbook-archive-accounts.firebasestorage.app",
-    messagingSenderId: "73621536424",
-    appId: "1:73621536424:web:a6d319510c81d1cda54c9d",
-    measurementId: "G-39QCNWCKPB"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-
-
-
-
-  
 </body>
 </html>
-
