@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Comments</title>
+  <style>
+    body{font-family:system-ui,Arial;margin:18px}
+    #comment-list{margin-top:1rem}
+    .comment{border-bottom:1px solid #eee;padding:8px 0}
+    .meta{color:#666;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <!-- Set data-post-id on a container or replace POST_ID below per page -->
+  <div id="comments" data-post-id="POST_ID">
+    <h3>Comments</h3>
+
+    <div id="auth">
+      <div id="auth-forms">
+        <input id="email" type="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
+        <button id="signup">Create account</button>
+        <button id="signin">Sign in</button>
+      </div>
+      <div id="user-area" style="display:none">
+        <span id="user-info"></span>
+        <button id="signout">Sign out</button>
+      </div>
+    </div>
+
+    <div id="comment-form" style="display:none;margin-top:12px">
+      <textarea id="content" rows="3" cols="60" placeholder="Say something nice..."></textarea><br>
+      <button id="post">Post comment</button>
+    </div>
+
+    <div id="comment-list"></div>
+  </div>
+
+  <script type="module">
+    // 1) Paste your firebaseConfig here (from Firebase Console)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      // ...other keys
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      query,
+      where,
+      orderBy,
+      onSnapshot,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Elements
+    const container = document.getElementById('comments');
+    const postId = container.dataset.postId || 'global';
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const signupBtn = document.getElementById('signup');
+    const signinBtn = document.getElementById('signin');
+    const signoutBtn = document.getElementById('signout');
+    const userArea = document.getElementById('user-area');
+    const userInfo = document.getElementById('user-info');
+    const commentForm = document.getElementById('comment-form');
+    const postBtn = document.getElementById('post');
+    const contentInput = document.getElementById('content');
+    const commentList = document.getElementById('comment-list');
+
+    signupBtn.onclick = async () => {
+      const email = emailInput.value.trim();
+      const pw = passwordInput.value;
+      if (!email || !pw) return alert('Enter email and password');
+      try {
+        await createUserWithEmailAndPassword(auth, email, pw);
+      } catch (e) {
+        console.error(e);
+        alert('Sign-up failed: ' + e.message);
+      }
+    };
+
+    signinBtn.onclick = async () => {
+      const email = emailInput.value.trim();
+      const pw = passwordInput.value;
+      if (!email || !pw) return alert('Enter email and password');
+      try {
+        await signInWithEmailAndPassword(auth, email, pw);
+      } catch (e) {
+        console.error(e);
+        alert('Sign-in failed: ' + e.message);
+      }
+    };
+
+    signoutBtn.onclick = () => signOut(auth);
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        userArea.style.display = 'block';
+        document.getElementById('auth-forms').style.display = 'none';
+        userInfo.textContent = `${user.email}`;
+        commentForm.style.display = 'block';
+      } else {
+        userArea.style.display = 'none';
+        document.getElementById('auth-forms').style.display = 'block';
+        userInfo.textContent = '';
+        commentForm.style.display = 'none';
+      }
+    });
+
+    postBtn.onclick = async () => {
+      const user = auth.currentUser;
+      if (!user) return alert('Sign in first');
+      const content = contentInput.value.trim();
+      if (!content) return;
+      // Simple content length guard
+      if (content.length > 2000) return alert('Comment too long (2000 chars max)');
+      try {
+        await addDoc(collection(db, 'comments'), {
+          post_id: postId,
+          content,
+          author_uid: user.uid,
+          author_email: user.email,
+          created_at: serverTimestamp(),
+          approved: true
+        });
+        contentInput.value = '';
+      } catch (e) {
+        console.error(e);
+        alert('Failed to post');
+      }
+    };
+
+    // Live list: show only approved comments for this post
+    const q = query(
+      collection(db, 'comments'),
+      where('post_id', '==', postId),
+      orderBy('created_at', 'desc')
+    );
+    onSnapshot(q, snapshot => {
+      commentList.innerHTML = '';
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        if (!d.approved) return; // hide unapproved
+        const el = document.createElement('div');
+        el.className = 'comment';
+        const when = d.created_at?.toDate ? d.created_at.toDate().toLocaleString() : '';
+        el.innerHTML = `<div class="meta"><strong>${escapeHtml(d.author_email)}</strong> · <small>${when}</small></div><div>${escapeHtml(d.content)}</div>`;
+        commentList.appendChild(el);
+      });
+    });
+
+    // Basic escaping to avoid injecting HTML
+    function escapeHtml(s){ return String(s || '').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+  </script>
+
+  // and then the scripttt!!
+
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDx9a-YIut8aM1AaoMPFD6NvMiBfP7QyNI",
+    authDomain: "sketchbook-archive-accounts.firebaseapp.com",
+    projectId: "sketchbook-archive-accounts",
+    storageBucket: "sketchbook-archive-accounts.firebasestorage.app",
+    messagingSenderId: "73621536424",
+    appId: "1:73621536424:web:a6d319510c81d1cda54c9d",
+    measurementId: "G-39QCNWCKPB"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+
+
+
+  
+</body>
+</html>
+
