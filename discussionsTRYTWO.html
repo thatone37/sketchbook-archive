@@ -1,15 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">  
-  
-  <head>
+<head>
   <meta charset="utf-8" />
   <title> DISCUSSIONS </title>
-  <h2> HUGE work in progress! umm yea CONSTRUCTION! make an account if u want?? but i dont have everything else set up yet lol</h2>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
   <style>
     body{font-family:system-ui,Arial;margin:18px}
     #comment-list{margin-top:1rem}
@@ -18,7 +20,10 @@
     input, textarea {font-family:inherit}
   </style>
 </head>
+
 <body>
+  <h2> HUGE work in progress! umm yea CONSTRUCTION! make an account if u want?? but i dont have everything else set up yet lol</h2>
+
   <!-- Set data-post-id on this container (replace POST_ID per page) -->
   <div id="comments" data-post-id="discussionsTRYTWO">
     <h3>Comments</h3>
@@ -166,6 +171,11 @@
     );
     onSnapshot(q, snapshot => {
       commentList.innerHTML = '';
+      console.log('Comments snapshot size:', snapshot.size);
+      if (snapshot.empty) {
+        commentList.textContent = 'No comments yet';
+        return;
+      }
       snapshot.forEach(doc => {
         const d = doc.data();
         if (!d.approved) return; // hide unapproved
@@ -175,15 +185,17 @@
         el.innerHTML = `<div class="meta"><strong>${escapeHtml(d.author_email)}</strong> · <small>${when}</small></div><div>${escapeHtml(d.content)}</div>`;
         commentList.appendChild(el);
       });
+    }, err => {
+      console.error('Comments snapshot error', err);
+      commentList.textContent = 'Error loading comments';
     });
 
     // Basic escaping to avoid injecting HTML
     function escapeHtml(s){ return String(s || '').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
-  
-  expose for console debugging window._fb = { app, auth, db, collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp };
+
+    // expose for console debugging
+    window._fb = { app, auth, db, collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp };
   </script>
 
-  <link rel="stylesheet" href="style.css">
-  
 </body>
 </html>
