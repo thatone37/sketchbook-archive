@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    body{font-family:system-ui,Arial;margin:18px}
+    /* keep only component styles here so site stylesheet (style.css) can control fonts/background */
     #comment-list{margin-top:1rem}
     .comment{border-bottom:1px solid #eee;padding:8px 0}
     .meta{color:#666;font-size:0.85rem}
@@ -270,4 +270,11 @@
     });
 
     // Basic escaping to avoid injecting HTML
-    function escapeHtml(s){ return String(s || '').replace(/[&<>\
+    function escapeHtml(s){ return String(s || '').replace(/[&<>">']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+
+    // expose for console debugging
+    window._fb = { app, auth, db, collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp };
+  </script>
+
+</body>
+</html>
