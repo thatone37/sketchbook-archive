@@ -18,6 +18,9 @@
     .comment{border-bottom:1px solid #eee;padding:8px 0}
     .meta{color:#666;font-size:0.85rem}
     input, textarea {font-family:inherit}
+    .comment.reply{ margin-left:16px; font-size:0.95em; border-left:2px solid #f7f7f7; padding-left:8px; }
+    .reply-btn{ background:none; border:0; color:#06c; cursor:pointer; padding:4px; font-size:0.95rem }
+    .reply-input{ width:100%; box-sizing:border-box; margin-top:6px }
   </style>
 </head>
 
@@ -151,6 +154,7 @@
         await addDoc(collection(db, 'comments'), {
           post_id: postId,
           content,
+          parent_id: null,
           author_uid: user.uid,
           author_email: user.email,
           created_at: serverTimestamp(),
@@ -163,7 +167,29 @@
       }
     };
 
-    // Live list: show only approved comments for this post
+    // Helper to post a reply to a parent comment
+    async function postReply(parentId, text) {
+      const user = auth.currentUser;
+      if (!user) return alert('Sign in first');
+      const content = String(text || '').trim();
+      if (!content) return;
+      try {
+        await addDoc(collection(db, 'comments'), {
+          post_id: postId,
+          parent_id: parentId,
+          content,
+          author_uid: user.uid,
+          author_email: user.email,
+          created_at: serverTimestamp(),
+          approved: true
+        });
+      } catch (e) {
+        console.error('Failed to post reply', e);
+        alert('Failed to post reply');
+      }
+    }
+
+    // Live list: show comments for this post (top-level only). We'll fetch replies separately per comment.
     const q = query(
       collection(db, 'comments'),
       where('post_id', '==', postId),
@@ -179,10 +205,63 @@
       snapshot.forEach(doc => {
         const d = doc.data();
         if (!d.approved) return; // hide unapproved
+        // Only render top-level comments here (parent_id falsy)
+        if (d.parent_id) return;
         const el = document.createElement('div');
         el.className = 'comment';
         const when = d.created_at?.toDate ? d.created_at.toDate().toLocaleString() : '';
         el.innerHTML = `<div class="meta"><strong>${escapeHtml(d.author_email)}</strong> · <small>${when}</small></div><div>${escapeHtml(d.content)}</div>`;
+
+        // Reply button and inline form
+        const replyBtn = document.createElement('button');
+        replyBtn.className = 'reply-btn';
+        replyBtn.textContent = 'Reply';
+        el.appendChild(replyBtn);
+
+        const replyForm = document.createElement('div');
+        replyForm.style.display = 'none';
+        replyForm.innerHTML = `<textarea class="reply-input" rows="2" placeholder="Write a reply..."></textarea><br><button class="send-reply">Send</button>`;
+        el.appendChild(replyForm);
+
+        replyBtn.onclick = () => {
+          replyForm.style.display = replyForm.style.display === 'block' ? 'none' : 'block';
+          if (replyForm.style.display === 'block') replyForm.querySelector('.reply-input').focus();
+        };
+
+        replyForm.querySelector('.send-reply').onclick = () => {
+          const txt = replyForm.querySelector('.reply-input').value;
+          postReply(doc.id, txt);
+          replyForm.querySelector('.reply-input').value = '';
+          replyForm.style.display = 'none';
+        };
+
+        // Container for replies
+        const repliesContainer = document.createElement('div');
+        repliesContainer.className = 'replies';
+        el.appendChild(repliesContainer);
+
+        // Listen for replies to this comment
+        const repliesQ = query(
+          collection(db, 'comments'),
+          where('post_id', '==', postId),
+          where('parent_id', '==', doc.id),
+          orderBy('created_at', 'asc')
+        );
+        onSnapshot(repliesQ, snap => {
+          repliesContainer.innerHTML = '';
+          snap.forEach(rdoc => {
+            const rd = rdoc.data();
+            if (!rd.approved) return;
+            const rEl = document.createElement('div');
+            rEl.className = 'comment reply';
+            const whenr = rd.created_at?.toDate ? rd.created_at.toDate().toLocaleString() : '';
+            rEl.innerHTML = `<div class="meta"><strong>${escapeHtml(rd.author_email)}</strong> · <small>${whenr}</small></div><div>${escapeHtml(rd.content)}</div>`;
+            repliesContainer.appendChild(rEl);
+          });
+        }, err => {
+          console.error('Replies snapshot error', err);
+        });
+
         commentList.appendChild(el);
       });
     }, err => {
@@ -191,11 +270,4 @@
     });
 
     // Basic escaping to avoid injecting HTML
-    function escapeHtml(s){ return String(s || '').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
-
-    // expose for console debugging
-    window._fb = { app, auth, db, collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp };
-  </script>
-
-</body>
-</html>
+    function escapeHtml(s){ return String(s || '').replace(/[&<>\
