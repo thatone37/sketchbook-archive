@@ -28,9 +28,8 @@ const sketchbooks = [
   { id: "rae", name: "rae-sketches" },
   { id: "mario", name: "mario-sketches" },
   { id: "insect", name: "insect-sketches" },
-  // "yes" and "no" are the ids used in the root index.html buttons
-  { id: "yes", name: "like-btn-yes" },
-  { id: "no", name: "like-btn-no" }
+   { id: "cory", name: "cory-sketches" }
+ 
 ];
 
 sketchbooks.forEach(({ id, name }) => {
