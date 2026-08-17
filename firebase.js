@@ -29,7 +29,7 @@ const sketchbooks = [
   { id: "mario", name: "mario-sketches" },
   { id: "insect", name: "insect-sketches" },
    { id: "cory", name: "cory-sketches" },
-  { id: "insect", name: "lynn-sketches" }
+  { id: "lynn", name: "lynn-sketches" }
  
 ];
 
