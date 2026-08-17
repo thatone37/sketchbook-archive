@@ -71,6 +71,7 @@ body {
   font-family: "Indie Flower", cursive;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 main {
@@ -96,7 +97,7 @@ main {
   font-family: Verdana, sans-serif;
 }
 
-/* Ticker styles */
+
 .ticker {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
