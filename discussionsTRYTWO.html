@@ -19,7 +19,7 @@
     .meta{color:#666;font-size:0.85rem}
     input, textarea {font-family:inherit}
     .comment.reply{ margin-left:16px; font-size:0.95em; border-left:2px solid #f7f7f7; padding-left:8px; }
-    .reply-btn{ background:none; border:0; color:#06c; cursor:pointer; padding:4px; font-size:0.95rem }
+    .reply-btn{ background-color:#FFC1CF; border:0; color:#06c; cursor:pointer; padding:4px; font-size:0.95rem }
     .reply-input{ width:100%; box-sizing:border-box; margin-top:6px }
   </style>
 </head>
@@ -46,7 +46,7 @@
 
     <div id="comment-form" style="display:none;margin-top:12px">
       <textarea id="content" rows="3" cols="60" placeholder="whats on your mind?"></textarea><br>
-      <button id="post">Post</button>
+      <button id="post">okay ദ്ദി!!</button>
     </div>
 
     <div id="comment-list"></div>
@@ -215,7 +215,7 @@
         // Reply button and inline form
         const replyBtn = document.createElement('button');
         replyBtn.className = 'reply-btn';
-        replyBtn.textContent = 'Reply';
+        replyBtn.textContent = 'reply';
         el.appendChild(replyBtn);
 
         const replyForm = document.createElement('div');
