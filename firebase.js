@@ -43,7 +43,8 @@ const sketchbooks = [
   { id: "apple", name: "apple-sketches" },
   { id: "sealfest", name: "sealfest-sketches" },
   { id: "heliocanvas", name: "heliocanvas-sketches" },
-   { id: "wurm", name: "wurm-sketches" }
+   { id: "wurm", name: "wurm-sketches" },
+  { id: "yourlocalstarbucks", name: "yourlocalstarbucks-sketches" }
  
 ];
 
