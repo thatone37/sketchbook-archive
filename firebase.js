@@ -44,7 +44,8 @@ const sketchbooks = [
   { id: "sealfest", name: "sealfest-sketches" },
   { id: "heliocanvas", name: "heliocanvas-sketches" },
    { id: "wurm", name: "wurm-sketches" },
-  { id: "yourlocalstarbucks", name: "yourlocalstarbucks-sketches" }
+  { id: "yourlocalstarbucks", name: "yourlocalstarbucks-sketches" },
+   { id: "paula", name: "paula-sketches" }
  
 ];
 
